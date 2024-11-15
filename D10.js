@@ -725,6 +725,7 @@ function halfTree(parametro) {
 
 halfTree(3);
 
+
 /* ESERCIZIO 28
   Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
 
@@ -759,8 +760,6 @@ sp0 as3
 console.log('---ES 28---');
 
 function tree(parametro) {
-  let riga = '';
-  let asterisco = '*'; //numero linee - i
 
   for (let j = 1; j <= parametro; j++) {
     let riga = ''.repeat(parametro - 1);
@@ -770,6 +769,18 @@ function tree(parametro) {
 }
 
 tree();
+
+
+function tree2 (parametro){
+  for (let i = 1; i <= parametro; i++){
+    riga = ''.repeat(parametro -1);
+    for(let j = 1; j >=parametro; j--){
+      asterisco = '*'.repeat(2* j-1);
+    }
+  }
+}
+
+tree2(3);
 
 /* ESERCIZIO 29
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
