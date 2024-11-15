@@ -475,7 +475,7 @@ console.log(mostaIlFilmRecente);
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
 
-console.log('---ES 12---');
+console.log('---ES 13---');
 
 
 function countMovies(movies) {
