@@ -390,12 +390,16 @@ console.log(howManyDays('2024-10-21'));
 
 console.log('---ES 10---');
 
+let giornoOggi = 15;
+let meseOggi = 11;
 
 function isTodayMyBirthday (){
-  const meseCompleanno = 10;
-  const giornoCompleanno = 21;
-  const oggi = new Date();
-  if (constolloCompleanno = oggi.getMonth() === meseCompleanno && oggi.getDate() === giornoCompleanno){
+  let oggi = new Date();
+  
+  oggi.getMonth()+1;
+  oggi.getDay()+1;
+
+  if (giornoOggi === 21 && meseOggi === 10){
     return true;
   }else{
     return false;
@@ -417,15 +421,22 @@ console.log('---ES 11---');
 
 //const newMovieArr= [];
 function deleteProp (oggetto, str){
-  delete oggetto[str];
-  return oggetto;
+  const newObj= {...oggetto};
+  delete newObj [str];
+  return newObj;
 }
 
-const newMovieArr =  movies.forEach(elemento => deleteProp(elemento, 'Poster'))
+const nuovoFilm = {
+    Title: 'ciao',
+    Year: '2001',
+    imdbID: 'tt0120737',
+    Type: 'movie',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg',
+};
 
-console.log(movies);
-
-
+const filmRandom= deleteProp (nuovoFilm, 'Poster');
+console.log(filmRandom);
 
 /* ESERCIZIO 12
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
@@ -505,6 +516,17 @@ console.log(filmDelMillenioScorso);
 
 console.log('---ES 16---');
 
+function sumAllTheYears (movies){
+  let somma = 0;
+  for(let i = 0; i < movies.length; i++){
+    somma += parseInt(movies[i].Year);
+  }
+  return somma;
+}
+
+const sommaTotaleAnni = sumAllTheYears(movies);
+console.log(sommaTotaleAnni);
+
 
 /* ESERCIZIO 17
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
@@ -512,21 +534,59 @@ console.log('---ES 16---');
 
 console.log('---ES 17---');
 
+function searchByTitle(str){
+  const filmTrovati = [];
+  for (let i = 0; i < movies.length; i++){
+    if(movies[i].Title.includes(str)){
+      filmTrovati.push(movies[i]);
+    }
+  }
+  return filmTrovati;
+}
+
+console.log(searchByTitle("Avengers"));
+
+//se rimane tempo aggiungi la possibità di trovare anche in base alle minuscole
+
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
 
-console.log('---ES 12---');
+console.log('---ES 18---');
+
+function searchAndDivide(str){
+  const nuovoArrTitoli = {
+    match: [],
+    unmatch:[]
+  }
+  for(let i = 0; i<movies.length; i++){
+    if (movies[i].Title.includes(str)){
+      nuovoArrTitoli.match.push(movies[i].Title);
+    }else{
+      nuovoArrTitoli.unmatch.push(movies[i].Title);
+    }
+  }
+  return nuovoArrTitoli;
+}
+
+console.log(searchAndDivide('Avengers'));
 
 
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
 
-console.log('---ES 12---');
+console.log('---ES 19---');
 
+function removeIndex(i){
+  movies.splice(i, 1);
+
+  return movies
+}
+
+console.log(removeIndex(2));
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
@@ -534,32 +594,92 @@ console.log('---ES 12---');
   Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
 */
 
-console.log('---ES 12---');
+function contenitore (){
+  const container = document.getElementById('container');
+  return container;
+}
+
+contenitore();
 
 
 /* ESERCIZIO 21
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
 
+function tabella (){
+  const cellaTabella = document.querySelectorAll('td');
+  return cellaTabella;
+}
+
+tabella();
+
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
+
+console.log('---ES 22---');
+
+function contenutoTd (){
+  const elementiTd = document.querySelectorAll('td');
+  elementiTd.forEach((td) => {
+    console.log(td.innerHTML);
+  })
+}
+
+contenutoTd();
 
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
 
+function aggiungiSfondo (){
+  const link = document.querySelectorAll('a');
+  link.forEach((link) =>{
+    link.style.backgroundColor = 'red';
+  })
+}
+
+aggiungiSfondo();
+
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
+
+function elementoExtra(){
+  const lista = document.getElementById('myList');
+  let nuovoElemento = document.createElement('li');
+  nuovoElemento.innerHTML = 'Sono aggiunto correttamente';
+  lista.appendChild(nuovoElemento);
+}
+
+elementoExtra();
 
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
 
+function svuotaLaLista(){
+  const lista = document.getElementById('myList');
+
+  while(lista.firstChild){
+    lista.removeChild(lista.firstChild);
+  }
+}
+
+svuotaLaLista();
+
 /* ESERCIZIO 26
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
 */
+
+function aggiungiClasse (){
+  const celle = document.querySelectorAll('tr');
+  celle.forEach(function(e){
+    e.classList.add('test');
+  });
+}
+
+aggiungiClasse();
 
 // [EXTRA] JS Avanzato
 
@@ -575,6 +695,19 @@ console.log('---ES 12---');
 
 */
 
+console.log('---ES 27---');
+
+function halfTree(parametro){
+  let riga = '';
+  for (let i = 0; i<=parametro; i++){
+    riga += '*';
+
+    console.log(riga);
+  }
+}
+
+halfTree(3);
+
 /* ESERCIZIO 28
   Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
 
@@ -586,6 +719,30 @@ console.log('---ES 12---');
   *****
 
 */
+
+/*
+struttura mentale... col for ripeto quindi ripeto spazi
+gli spazi sono inversamente piramidali
+gli asterischi si posizionano al centro
+
+quindi
+
+
+*/ 
+
+console.log('---ES 28---');
+
+function tree(parametro){
+  
+  for (let i = 0; i<=parametro; i++){
+    let riga = '';
+    riga += '*';
+
+    console.log(riga);
+  }
+}
+
+tree(3);
 
 /* ESERCIZIO 29
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
